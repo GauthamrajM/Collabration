@@ -1,0 +1,42 @@
+<div class="container">
+    <h5 *ngIf="errStatus" class="text-center mt-3 text-danger">{{errMessage}}</h5>
+    <form [formGroup]="userObj" #ref="ngForm" class="w-75 mx-auto mt-5" (ngSubmit)="userLogin()">
+        
+        <div class="form-floating mb-3">
+            <input type="username" class="form-control" id="username" placeholder="name@example.com" name="username"
+                formControlName="username">
+            <label for="username">Username</label>
+        </div>
+        <!--Validation-->
+        <div class="text-danger" *ngIf="username.invalid&&(username.dirty||username.touched)||ref.submitted">
+            <p *ngIf="username.errors?.['required']">
+                *Username is mandatory
+            </p>
+        </div>
+        <div class="text-danger" *ngIf="username.invalid&&(username.dirty)||ref.submitted">
+            <p *ngIf="username.errors?.['minlength']">
+                *Minimum is 4
+            </p>
+        </div>
+        <div class="text-danger" *ngIf="username.invalid&&(username.dirty)||ref.submitted">
+            <p *ngIf="username.errors?.['maxlength']">
+                *Maximum is 20
+            </p>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password" formControlName="password">
+            <label for="password">Password</label>
+        </div>
+         <!--Validation-->
+         <div class="text-danger" *ngIf="password.invalid&&(password.dirty||password.touched)||ref.submitted">
+            <p *ngIf="password.errors?.['required']">
+                *Password is mandatory
+            </p>
+        </div>
+        
+        <button class="btn btn-primary m-3" type="submit">Login</button>
+        <button class="btn btn-primary m-3" type="submit">Sign-Up</button>
+
+        <p class="text-center"><a href="#">Forget Password</a></p>
+    </form>
+</div>
